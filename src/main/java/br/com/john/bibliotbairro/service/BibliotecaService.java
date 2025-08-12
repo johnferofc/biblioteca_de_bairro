@@ -39,14 +39,24 @@ public class BibliotecaService {
         System.out.println("Livro indisponível para empréstimo.");
     }
 
-    public void devolverLivro(int idLivro){
+    public void devolverLivro(int idLivro) {
         List<Livro> livros = livroDAO.listarLivros();
-        for (Livro l: livros){
-            if (l.getId() == idLivro && l.getCopiasDisponiveis() < l.getCopiasDisponiveis()){
+        boolean devolvido = false; // Flag para controlar se houve devolução
+
+        for (Livro l : livros) {
+            // Verifica se o livro corresponde e se ainda é possível devolver
+            if (l.getId() == idLivro && l.getCopiasDisponiveis() < l.getTotalCopias()) {
                 livroDAO.atualizarCopias(idLivro, l.getCopiasDisponiveis() + 1);
                 System.out.println("Livro devolvido com sucesso");
+                devolvido = true;
+                break; // Sai do loop pois já encontrou o livro
             }
         }
-        System.out.println("Erro ao devolver livro.");
+
+        if (!devolvido) {
+            System.out.println("Erro ao devolver livro!");
+        }
     }
+
+
 }

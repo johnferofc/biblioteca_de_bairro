@@ -20,7 +20,7 @@ public class Main {
             System.out.println("5. Emprestar Livro");
             System.out.println("6. Devolver Livro");
             System.out.println("0. Sair");
-            System.out.println("Escolha: ");
+            System.out.print("Escolha: ");
             opcao = sc.nextInt();
             sc.nextLine();
 
@@ -50,7 +50,7 @@ public class Main {
                         .forEach(u ->
                                 System.out.println(u.getId() + " - " + u.getNome() + " - " + u.getContato()));
                 case 5 -> {
-                    System.out.print("ID do Livro:");
+                    System.out.print("ID do Livro: ");
                     int idLivroEmp = sc.nextInt();
                     service.emprestarLivro(idLivroEmp);
                 }
